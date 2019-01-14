@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import y530.retrofitdemo.network.AppUtils;
+import y530.retrofitdemo.network2.utils.Utils;
 
 public class App extends Application {
 
@@ -16,6 +17,7 @@ public class App extends Application {
         super.onCreate();
         app = this;
         AppUtils.init(app);
+        Utils.init(this);
     }
 
 

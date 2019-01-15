@@ -17,7 +17,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -72,8 +74,9 @@ public class TestNet2Activity extends BaseActivity {
         LoginRequest loginRequest = new LoginRequest(this);
         loginRequest.setUserId("123456");
         loginRequest.setPassword("123123");
+        Map<String, Object> params = new HashMap<>();
         RetrofitHelper.getApiService()
-                .login(loginRequest)
+                .login(params)
                 .compose(RxUtil.<LoginResponse>rxSchedulerHelper(this))
                 .subscribe(new DefaultObserver<LoginResponse>() {
                     @Override

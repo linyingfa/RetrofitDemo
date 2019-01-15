@@ -74,7 +74,9 @@ public interface IdeaApiService {
      */
     @Multipart
     @POST("upload/uploadFile.do")
-    Observable<BasicResponse<BasicResponse>> uploadFiles(@Part("phone") RequestBody phone, @Part("password") RequestBody password, @Part MultipartBody.Part image);
+    Observable<BasicResponse<BasicResponse>> uploadFiles(@Part("phone") RequestBody phone,
+                                                         @Part("password") RequestBody password,
+                                                         @Part MultipartBody.Part image);
 
     /**
      * 多文件上传 方法一

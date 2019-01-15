@@ -31,21 +31,23 @@ import y530.retrofitdemo.network.model.FeedbackModel;
  */
 
 public class OnSuccessAndFaultSub<T> extends DisposableObserver<ResponseBody> implements ProgressCancelListener {
+
     /**
      * 是否需要显示默认Loading
      */
     private boolean showProgress = true;
     private OnSuccessAndFaultListener mOnSuccessAndFaultListener;
-
     private Context context;
     private ProgressDialog progressDialog;
-
+    T t;
 
     /**
      * @param mOnSuccessAndFaultListener 成功回调监听
      */
     public OnSuccessAndFaultSub(OnSuccessAndFaultListener mOnSuccessAndFaultListener) {
         this.mOnSuccessAndFaultListener = mOnSuccessAndFaultListener;
+        //class y530.retrofitdemo.network.utils.OnSuccessAndFaultSub
+        System.out.println(getClass());
     }
 
 
@@ -158,14 +160,23 @@ public class OnSuccessAndFaultSub<T> extends DisposableObserver<ResponseBody> im
             final String result = jsonObject.getString("data");
             Log.e("body", result);
             if (resultCode == 200) {
-                Type type = getClass().getGenericSuperclass();
+                Type[] T2 = getClass().getGenericInterfaces();
+                ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
+                Type[] types = type.getActualTypeArguments();
+                Type typeToken = (Class<T>) type.getActualTypeArguments()[0];
+                int a = 1;
+                //class y530.retrofitdemo.network.utils.OnSuccessAndFaultSub
+                System.out.println(getClass());
+                //返回直接继承的父类（包含泛型参数）
+                //io.reactivex.observers.DisposableObserver<okhttp3.ResponseBody>
+               /* Type type = getClass().getGenericSuperclass();
                 if (type instanceof ParameterizedType) {
                     ParameterizedType pType = (ParameterizedType) type;
                     Type typeToken = pType.getActualTypeArguments()[0];
                     T t = new Gson().fromJson(responseBody.string(), typeToken);
                     FeedbackModel feedbackModel = (FeedbackModel) t;
                     mOnSuccessAndFaultListener.onSuccess(result);
-                }
+                }*/
             } else {
                 mOnSuccessAndFaultListener.onFault(msg);
                 Log.e("OnSuccessAndFaultSub", "errorMsg: " + msg);
